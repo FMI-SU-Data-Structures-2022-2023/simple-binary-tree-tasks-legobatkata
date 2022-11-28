@@ -10,10 +10,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(solution STATIC)
 
 target_sources(
-	solution
-	PRIVATE
-		src/solution.cpp
-		src/solution.h
+        solution
+        PRIVATE
+        src/solution.cpp
+        src/solution.h
 )
 
 
@@ -21,16 +21,16 @@ target_sources(
 add_executable(checker)
 
 target_link_libraries(
-	checker
-	PRIVATE
-		solution
-		Catch2::Catch2WithMain
+        checker
+        PRIVATE
+        solution
+        Catch2::Catch2WithMain
 )
 
 target_sources(
-	checker
-	PRIVATE
-		src/application.cpp
+        checker
+        PRIVATE
+        src/application.cpp
 )
 
 
@@ -41,9 +41,9 @@ target_sources(
 Include(FetchContent)
 
 FetchContent_Declare(
-  Catch2
-  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-  GIT_TAG        v3.1.1)
+        Catch2
+        GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+        GIT_TAG        v3.1.1)
 
 FetchContent_MakeAvailable(Catch2)
 
@@ -51,25 +51,25 @@ list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
 
 
 # Executable target for the unit tests
-add_executable(testing)
+add_executable(testingTarget)
 
 target_link_libraries(
-	testing
-	PRIVATE
-		solution
-		Catch2::Catch2WithMain
+        testingTarget
+        PRIVATE
+        solution
+        Catch2::Catch2WithMain
 )
 
-target_include_directories(testing PRIVATE "src")
+target_include_directories(testingTarget PRIVATE "src")
 
 target_sources(
-	testing
-	PRIVATE
-		test/solution.cpp
+        testingTarget
+        PRIVATE
+        test/solution.cpp
 )
 
 
 # Automatically register all tests
 include(CTest)
 include(Catch)
-catch_discover_tests(testing)
+catch_discover_tests(testingTarget)
